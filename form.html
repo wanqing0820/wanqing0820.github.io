@@ -91,6 +91,12 @@
         <br>
         <input class="formEntry" type="text" id="Vendor" placeholder="Vendor">
         <br>
+        <input class="formEntry" type="date" id="StartDate" placeholder="Start Date">
+        <br>
+        <input class="formEntry" type="date" id="EndDate" placeholder="End Date">
+        <br>
+        <input class="formEntry" type="text" id="Amount" placeholder="Amount">
+        <br>
         <input class="btn" type="submit" value="Submit"/>
 
     </form>
@@ -104,6 +110,9 @@
                 <th>Channel</th>
                 <th>Channel Split</th>
                 <th>Vendor</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Amount</th>
             </tr>
         </thead>
         <tbody>
@@ -162,7 +171,10 @@
             channelCategory: document.getElementById("ChannelCategory").value,
             channel: document.getElementById("Channel").value,
             channelSplit: document.getElementById("ChannelSplit").value,
-            vendor:document.getElementById("Vendor").value
+            vendor:document.getElementById("Vendor").value,
+            startDate:document.getElementById("StartDate").value,
+            endDate:document.getElementById("EndDate").value,
+            amount:document.getElementById("Amount").value
             })
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
@@ -223,6 +235,24 @@
                 // Append a text node to the cell
                 var newText5 = document.createTextNode(doc.data().vendor);
                 newCell5.appendChild(newText5);
+                
+                var newCell6 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText6 = document.createTextNode(doc.data().startDate);
+                newCell6.appendChild(newText6);
+                
+                var newCell7 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText7 = document.createTextNode(doc.data().endDate);
+                newCell7.appendChild(newText7);
+                
+                var newCell8 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText8 = document.createTextNode(doc.data().endDate);
+                newCell8.appendChild(newText8);
 
             });
         });
@@ -239,11 +269,6 @@
                 gapi.auth2.init();
             });
             }
-
-    
-
-        
-
 
     </script>
      <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
