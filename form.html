@@ -85,6 +85,10 @@
         <br>
         <input class="formEntry" type="text" id="ChannelCategory" placeholder="Channel Category">
         <br>
+        <input class="formEntry" type="text" id="Channel" placeholder="Channel">
+        <br>
+        <input class="formEntry" type="text" id="ChannelSplit" placeholder="Channel Split">
+        <br>
         <input class="btn" type="submit" value="Submit"/>
 
     </form>
@@ -95,6 +99,8 @@
                 <th>Entered By</th>
                 <th>Medium</th>
                 <th>Channel Category</th>
+                <th>Channel</th>
+                <th>Channel Split</th>
             </tr>
         </thead>
         <tbody>
@@ -150,7 +156,9 @@
             db.collection("expenses").add({
             enteredBy: document.getElementById("EnteredBy").value,
             medium: document.getElementById("Medium").value,
-            channelCategory: document.getElementById("ChannelCategory").value
+            channelCategory: document.getElementById("ChannelCategory").value,
+            channel: document.getElementById("ChannelCategory").value,
+            channelSplit: document.getElementById("ChannelCategory").value
             })
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
@@ -190,6 +198,20 @@
                 // Append a text node to the cell
                 var newText2 = document.createTextNode(doc.data().channelCategory);
                 newCell2.appendChild(newText2);
+                
+                // Insert a cell at the end of the row
+                var newCell3 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText3 = document.createTextNode(doc.data().channelCategory);
+                newCell3.appendChild(newText3);
+                
+                // Insert a cell at the end of the row
+                var newCell4 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText4 = document.createTextNode(doc.data().channelCategory);
+                newCell4.appendChild(newText4);
 
             });
         });
