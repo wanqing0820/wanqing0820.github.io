@@ -89,6 +89,8 @@
         <br>
         <input class="formEntry" type="text" id="ChannelSplit" placeholder="Channel Split">
         <br>
+        <input class="formEntry" type="text" id="Vendor" placeholder="Vendor">
+        <br>
         <input class="btn" type="submit" value="Submit"/>
 
     </form>
@@ -101,6 +103,7 @@
                 <th>Channel Category</th>
                 <th>Channel</th>
                 <th>Channel Split</th>
+                <th>Vendor</th>
             </tr>
         </thead>
         <tbody>
@@ -158,7 +161,8 @@
             medium: document.getElementById("Medium").value,
             channelCategory: document.getElementById("ChannelCategory").value,
             channel: document.getElementById("Channel").value,
-            channelSplit: document.getElementById("ChannelSplit").value
+            channelSplit: document.getElementById("ChannelSplit").value,
+            vendor:document.getElementById("Vendor").value
             })
             .then((docRef) => {
                 console.log("Document written with ID: ", docRef.id);
@@ -203,15 +207,22 @@
                 var newCell3 = newRow.insertCell();
 
                 // Append a text node to the cell
-                var newText3 = document.createTextNode(doc.data().channelCategory);
+                var newText3 = document.createTextNode(doc.data().channel);
                 newCell3.appendChild(newText3);
                 
                 // Insert a cell at the end of the row
                 var newCell4 = newRow.insertCell();
 
                 // Append a text node to the cell
-                var newText4 = document.createTextNode(doc.data().channelCategory);
+                var newText4 = document.createTextNode(doc.data().channelSplit);
                 newCell4.appendChild(newText4);
+                
+                // Insert a cell at the end of the row
+                var newCell5 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText5 = document.createTextNode(doc.data().vendor);
+                newCell5.appendChild(newText5);
 
             });
         });
