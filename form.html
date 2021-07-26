@@ -77,18 +77,6 @@
     <script src="https://apis.google.com/js/api.js"></script>
     <div class="padding"></div>
     <button class="btn" id="signOutBtn" onclick="signOut();">Sign out</button>
-    
-    <script>
-        function getName() {
-            var auth2 = gapi.auth2.getAuthInstance();
-            if (auth2.isSignedIn.get()) {
-                var profile = auth2.currentUser.get().getBasicProfile();
-                var givenName = profile.getGivenName();
-                console.log(givenName);
-            }
-        }
-        getName();
-    </script>
 
     <form action="#" onsubmit="foo(); return false">
         <input class="formEntry" type="text" id="EnteredBy" placeholder="Entered by">
