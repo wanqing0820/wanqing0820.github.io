@@ -20,7 +20,7 @@
     <script>
         function onSignIn(googleUser){
             console.log(googleUser.getBasicProfile())
-            console.log(googleUser.getBasicProfile().getGiven());
+            console.log('Given Name: ' + profile.getGivenName());
             window.location = "form.html"
         }
     </script>
