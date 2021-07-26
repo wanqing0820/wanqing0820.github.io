@@ -83,12 +83,11 @@
             if (auth2.isSignedIn.get()) {
                 var profile = auth2.currentUser.get().getBasicProfile();
                 var givenName = profile.getGivenName();
-                return givenName;
+                console.log(givenName);
         }
+        getName();
     </script>
-    
-    <h1>"Hello " + givenName + "!"</h1>
-    
+
     <form action="#" onsubmit="foo(); return false">
         <input class="formEntry" type="text" id="EnteredBy" placeholder="Entered by">
         <br>
