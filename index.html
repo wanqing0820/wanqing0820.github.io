@@ -20,8 +20,10 @@
     <script>
         function onSignIn(googleUser){
             console.log(googleUser.getBasicProfile())
+            console.log(googleUser.getBasicProfile().getGiven());
             window.location = "form.html"
         }
+    </script>
     </script>
     
     <div class="g-signin2" data-onsuccess="onSignIn" data-width="300" data-height="50" data-longtitle="true"></div>
