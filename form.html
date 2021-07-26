@@ -185,7 +185,7 @@
         }
 
         console.log("HERE")
-        db.collection("expenses").get().then((querySnapshot) => {
+        db.collection("expenses").where("enteredBy", "==", "Chris Bernatz").get().then((querySnapshot) => {
             querySnapshot.forEach((doc) => {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
@@ -194,6 +194,13 @@
                 // Insert a row at the end of table
                 var newRow = tbodyRef.insertRow();
 
+                // Insert a cell at the end of the row
+                var newCell0 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText0 = document.createTextNode(doc.data().name);
+                newCell0.appendChild(newText0);
+                
                 // Insert a cell at the end of the row
                 var newCell = newRow.insertCell();
 
