@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="999442000203-kjgo40nuvu5158klbcresbji3roasmom.apps.googleusercontent.com">
+    <title>Document</title>
+    <style>
+        .formEntry{
+            font-weight: bold;
+            width: 200px;
+            margin: 0 500px 20px ;
+            height: 35px;
+            padding: 6px 15px;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            background: #F6F7F9;
+            color: #748194;
+            font-size: 14px;
+        }
+
+        .btn{
+            font-weight: bold;
+            width: 230px;
+            margin: 0 500px 20px ;
+            height: 45px;
+            padding: 6px 15px;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            background: #EE9BA3;
+            color: white;
+            font-size: 14px;
+        }
+
+        #signOutBtn{
+            width: 130px;
+            margin-left: 1000px;
+        }
+
+        .padding{
+            height: 50px;
+        }
+
+        table {
+            font-family: 'Arial';
+            margin: 50px auto;
+            margin-left: 400px;
+            border-collapse: collapse;
+            border: 1px solid #eee;
+            border-bottom: 2px solid #EE9BA3;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.10),
+                0px 10px 20px rgba(0,0,0,0.05),
+                0px 20px 20px rgba(0,0,0,0.05),
+                0px 30px 20px rgba(0,0,0,0.05);
+                    }
+
+        th, td {
+            color: #999;
+            border: 1px solid #eee;
+            padding: 12px 35px;
+            border-collapse: collapse;
+        }
+        th {
+            background: #EE9BA3;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <div class="padding"></div>
+    <button class="btn" id="signOutBtn" onclick="signOut();">Sign out</button>
+
+    <form action="#" onsubmit="foo(); return false">
+        <input class="formEntry" type="text" id="EnteredBy" placeholder="Entered by">
+        <br>
+        <input class="formEntry" type="text" id="Medium" placeholder="Medium">
+        <br>
+        <input class="formEntry" type="text" id="ChannelCategory" placeholder="Channel Category">
+        <br>
+        <input class="btn" type="submit" value="Submit"/>
+
+    </form>
+
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Entered By</th>
+                <th>Medium</th>
+                <th>Channel Category</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.7.0/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+
+    <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyBZOb-4mrkNSeXwFIhbC2N4kjurGtYCack",
+        authDomain: "crested-tracer-317903.firebaseapp.com",
+        projectId: "crested-tracer-317903",
+        storageBucket: "crested-tracer-317903.appspot.com",
+        messagingSenderId: "999442000203",
+        appId: "1:999442000203:web:6750675206b3fcb16f20ce",
+        measurementId: "G-ZJS7C4H869"
+     };
+    // // Initialize Firebase
+    // firebase.initializeApp(firebaseConfig);
+    // firebase.analytics();
+    </script>
+    <script>
+        // const firebase = require("firebase");
+        // // Required for side-effects
+        // require("firebase/firestore");
+        // // Initialize Cloud Firestore through Firebase
+        firebase.initializeApp({
+            apiKey: "AIzaSyBZOb-4mrkNSeXwFIhbC2N4kjurGtYCack",
+            authDomain: "crested-tracer-317903.firebaseapp.com",
+            projectId: "crested-tracer-317903",
+        });
+
+        var db = firebase.firestore();
+        
+        function foo() {
+            Swal.fire(
+            'Good job!',
+            'You have submitted the expense',
+            'success'
+            )
+            db.collection("expenses").add({
+            enteredBy: document.getElementById("EnteredBy").value,
+            medium: document.getElementById("Medium").value,
+            channelCategory: document.getElementById("ChannelCategory").value
+            })
+            .then((docRef) => {
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch((error) => {
+                console.error("Error adding document: ", error);
+            });
+        }
+
+        console.log("HERE")
+        db.collection("expenses").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                console.log(doc.id, " => ", doc.data());
+                var tbodyRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+                // Insert a row at the end of table
+                var newRow = tbodyRef.insertRow();
+
+                // Insert a cell at the end of the row
+                var newCell = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText = document.createTextNode(doc.data().enteredBy);
+                newCell.appendChild(newText);
+
+                // Insert a cell at the end of the row
+                var newCell1 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText1 = document.createTextNode(doc.data().medium);
+                newCell1.appendChild(newText1);
+
+                // Insert a cell at the end of the row
+                var newCell2 = newRow.insertCell();
+
+                // Append a text node to the cell
+                var newText2 = document.createTextNode(doc.data().channelCategory);
+                newCell2.appendChild(newText2);
+
+            });
+        });
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+            console.log('User signed out.');
+            window.location = "index.html"
+        })};
+
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+            }
+
+    
+
+        
+
+
+    </script>
+     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+</body>
+</html>
